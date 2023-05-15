@@ -9,7 +9,7 @@ import {
 import { useDispatch } from "react-redux";
 import { getApiConfiguration } from "./features/movieSlice";
 import Header from "./components/layout/Header/Header";
-import { Home, Movies, Tv, Details } from "./pages/allPages";
+import { Home, Movies, Tv, Details, SearchResults } from "./pages/allPages";
 
 function App() {
 
@@ -39,7 +39,8 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="movies" element={<Movies />} />
         <Route path="tv" element={<Tv />} />
-        <Route path="details" element={<Details />} />
+        <Route path="details/:id" element={<Details />} />
+        <Route path="search/:query" element={<SearchResults />} />
       </Route>
     )
   );
@@ -53,13 +54,3 @@ function App() {
 
 export default App;
 
-// const apiTest = () => {
-//   fetchMovieData("/movie/popular")
-//     .then((response) => {
-//     console.log(response);
-//   })
-// }
-
-// useEffect(() => {
-//   apiTest();
-// }, [])

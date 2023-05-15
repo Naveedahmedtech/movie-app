@@ -22,6 +22,7 @@
     "better-react-carousel": "^1.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-leaf-carousel": "^3.0.0",
     "react-multi-carousel": "^2.8.3",
     "react-redux": "^8.0.5",

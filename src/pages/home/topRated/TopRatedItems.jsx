@@ -1,6 +1,8 @@
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import Progress from "../../../components/progress/Progress";
-const TopRatedItems = ({items, url}) => {
+import { useNavigate } from "react-router-dom";
+const TopRatedItems = ({ items, url }) => {
+  const navigate = useNavigate();
   const rating = items?.vote_average.toFixed(1);
   const scaleMin = 0;
   const scaleMax = 100;
@@ -20,9 +22,14 @@ const TopRatedItems = ({items, url}) => {
     progressColor.color = "orange";
   else if (scaledRating < 60) progressColor.color = "red";
   else progressColor.color = "red";
+
+
+  const handleClick = () => {
+    navigate(`details/${items?.id}`)
+  }
   return (
     <>
-      <Card className="card-color">
+      <Card className="card-color" sx={{cursor: 'pointer'}} onClick={handleClick}>
         <CardMedia
           sx={{ height: "300px" }}
           image={url + items?.poster_path}

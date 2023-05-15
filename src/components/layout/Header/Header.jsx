@@ -4,17 +4,16 @@ import {
   AppBar,
   Toolbar,
   useMediaQuery,
-  CssBaseline,
   useScrollTrigger,
   Slide,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import json2mq from "json2mq";
-import Footer from "../Footer/Footer";
 import SearchField from "./SearchField";
 import NavLinks from "./NavLinks";
 import Logo from "./Logo";
 import ResHeader from "./resHeader/ResHeader";
+import Footer from "../footer/Footer"
 
 
 
