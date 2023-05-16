@@ -11,7 +11,7 @@ const OfficialClips = ({ video }) => {
       </Typography>
       <Box sx={{ display: "flex", flexWrap: "wrap" }}>
         {clips?.length <= 0 && (
-          <Typography className="text-white" variant="h5">
+          <Typography className="center color-danger" variant="h5">
             No Video Clips
           </Typography>
         )}
@@ -24,14 +24,12 @@ const OfficialClips = ({ video }) => {
 
 export default OfficialClips;
 
-
-
 const Clip = ({ clip }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
-      setOpen(true);
-      console.log(clip?.key)
+    setOpen(true);
+    console.log(clip?.key);
   };
 
   const handleClose = () => {

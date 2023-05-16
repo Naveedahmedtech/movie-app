@@ -14,16 +14,15 @@ import Progress from "../../components/progress/Progress";
 const DetailBanner = ({ data, url, video }) => {
   const [open, setOpen] = useState(false);
   const trailer = video?.results?.find((vid) => vid.type === "Trailer");
+
   const handleOpen = () => {
     setOpen(true);
-    console.log("open");
   };
   const handleClose = () => {
     setOpen(false);
-    console.log("closed");
   };
 
-  const rating = data?.vote_average.toFixed(1);
+  const rating = data?.vote_average?.toFixed(1);
   const scaleMin = 0;
   const scaleMax = 100;
   const ratingMin = 0;
@@ -150,7 +149,7 @@ const DetailBanner = ({ data, url, video }) => {
           <video
             src={`https://youtube.com/watch?v=${trailer?.key}`}
             width="100%"
-            height="auto"
+            height="100%"
             controls
           ></video>
         </Box>
