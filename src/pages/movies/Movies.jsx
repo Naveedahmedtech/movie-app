@@ -1,22 +1,11 @@
 import { useState, useEffect } from "react";
-import { fetchMovieData } from "../../utils/api";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {
-  Grid,
-  Typography,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  OutlinedInput,
-  MenuItem,
-  Checkbox,
-  ListItemText,
-} from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Grid, Typography, Box, CircularProgress } from "@mui/material";
 import CarouselContainer from "../../components/carouselContainer/CarouselContainer";
 import useFetch from "../../hooks/useFetch";
 import CardGridItems from "../../components/cardGridItems/CardGridItems";
+import GenreFilter from "../../components/genreFilter/GenreFilter";
+import { fetchMovieData } from "../../utils/api";
 
 const Movies = () => {
   const [data, setData] = useState(null);
@@ -68,67 +57,36 @@ const Movies = () => {
             className="text-white"
             sx={{ textAlign: "center", color: "red" }}
           >
-            Opps! No Match Results
+            Oops! No Match Results
           </Typography>
         )}
         {loading && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
+          <Box className="loading-box">
             <CircularProgress size={50} />
           </Box>
         )}
-        <FormControl sx={{ m: 2, minWidth: 120 }}>
-          <InputLabel id="genre-select-label">Filter</InputLabel>
-          <Select
-            labelId="genre-select-label"
-            id="genre-select"
-            multiple
-            value={selectedGenres}
-            onChange={handleGenreChange}
-            input={<OutlinedInput label="Select Genres" />}
-            renderValue={(selected) =>
-              selected
-                .map(
-                  (genreId) =>
-                    genres?.genres.find((genre) => genre.id === genreId)?.name
-                )
-                .join(", ")
-            }
-            sx={{ backgroundColor: "white", color: "black" }}
-          >
-            {genres?.genres.map((genre) => (
-              <MenuItem key={genre.id} value={genre.id}>
-                <Checkbox checked={selectedGenres.indexOf(genre.id) > -1} />
-                <ListItemText primary={genre.name} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <GenreFilter
+          genres={genres?.genres}
+          selectedGenres={selectedGenres}
+          handleGenreChange={handleGenreChange}
+        />
         <InfiniteScroll
           className="content"
-          dataLength={data?.results?.length || []}
+          dataLength={data?.results?.length || 0}
           next={fetchData}
           hasMore={pages <= data?.total_pages}
-          loader={"loading"}
+          loader={<div>Loading...</div>}
         >
           <Grid container spacing={2}>
             {data?.results?.length > 0 &&
-              data?.results?.map((items, index) => {
-                return (
-                  <CardGridItems
-                    key={index}
-                    items={items}
-                    fromSearch={true}
-                    media_type={items.media_type}
-                  />
-                );
-              })}
+              data?.results?.map((items, index) => (
+                <CardGridItems
+                  key={index}
+                  items={items}
+                  fromSearch={true}
+                  media_type={items.media_type}
+                />
+              ))}
           </Grid>
         </InfiniteScroll>
       </CarouselContainer>

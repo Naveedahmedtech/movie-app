@@ -6,7 +6,7 @@ import ResponsiveCarousel from "../../../components/responsiveCarousel/Responsiv
 import HomeCardItems from "../../../components/homeCardItems/HomeCardItems";
 const TopRatedCarousel = ({ deviceType }) => {
   const { url } = useSelector(movieState);
-  const { data, loading } = useFetch("/movie/top_rated");
+  const { data } = useFetch("/movie/top_rated");
   return (
     <>
       <Typography variant="h4" sx={{ color: "white", margin: "20px" }}>

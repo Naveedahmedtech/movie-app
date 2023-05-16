@@ -11,20 +11,7 @@ import {
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import Progress from "../../components/progress/Progress";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  outline: "none",
-};
-
-const DetailBanner = ({ data, loading, url, video }) => {
+const DetailBanner = ({ data, url, video }) => {
   const [open, setOpen] = useState(false);
   const trailer = video?.results?.find((vid) => vid.type === "Trailer");
   const handleOpen = () => {
@@ -109,11 +96,9 @@ const DetailBanner = ({ data, loading, url, video }) => {
                 </Typography>
               </CardContent>
 
-              <CardContent sx={{display: 'flex', flexWrap: 'wrap'}}>
+              <CardContent sx={{ display: "flex", flexWrap: "wrap" }}>
                 {data?.genres.map((gen) => (
-                  <Typography
-                    className="text-white gener-m"
-                  >
+                  <Typography className="text-white gener-m">
                     {gen.name}
                   </Typography>
                 ))}
@@ -134,9 +119,7 @@ const DetailBanner = ({ data, loading, url, video }) => {
                   }}
                   onClick={handleOpen}
                 />
-                <Typography className="text-white" >
-                  Watch Trailer 
-                </Typography>
+                <Typography className="text-white">Watch Trailer</Typography>
               </CardContent>
 
               <CardContent>
@@ -163,10 +146,7 @@ const DetailBanner = ({ data, loading, url, video }) => {
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
       >
-        <Box sx={style} style={{ backgroundColor: "transparent" }}>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            Trailer
-          </Typography>
+        <Box className="modal-style">
           <video
             src={`https://youtube.com/watch?v=${trailer?.key}`}
             width="100%"

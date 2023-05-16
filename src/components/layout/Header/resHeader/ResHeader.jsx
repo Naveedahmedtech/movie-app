@@ -43,15 +43,7 @@ useEffect(() => {
 
 
       <div className="res-nav" id={open && "open-res-nav"} ref={ref}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: "100px 0",
-          }}
-        >
+        <Box className="res-box">
           <NavLinks handleClose={handleClose} />
           <SearchField />
         </Box>

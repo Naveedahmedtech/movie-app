@@ -1,7 +1,6 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
 
-const CreditsCast = ({ credits, creditsLoading, url }) => {
+const CreditsCast = ({ credits, url }) => {
   return (
     <>
       <main style={{ margin: "40px" }}>

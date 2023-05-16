@@ -7,7 +7,7 @@ import ResponsiveCarousel from "../../../components/responsiveCarousel/Responsiv
 import HomeCardItems from "../../../components/homeCardItems/HomeCardItems";
 const PopularCarousel = () => {
   const { url } = useSelector(movieState);
-  const { data, loading } = useFetch("/movie/popular");
+  const { data } = useFetch("/movie/popular");
   return (
     <>
       <Typography variant="h4" sx={{ color: "white", margin: "20px" }}>

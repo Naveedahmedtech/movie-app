@@ -1,20 +1,5 @@
 import { Avatar, Box, Typography, Modal } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  outline: "none",
-};
 
 const OfficialClips = ({ video }) => {
   const clips = video?.results?.filter((vid) => vid.type !== "Trailer");
@@ -55,10 +40,10 @@ const Clip = ({ clip }) => {
 
   return (
     <>
-      <Box onClick={handleOpen} sx={{marginBottom: '10px'}}>
+      <Box onClick={handleOpen} sx={{ marginBottom: "10px" }}>
         <Avatar
-                  sx={{ width: "150px", height: "150px" }}
-                  className="avatar-m"
+          sx={{ width: "150px", height: "150px" }}
+          className="avatar-m"
           alt="C"
           src={`https://img.youtube.com/vi/${clip?.key}/mqdefault.jpg`}
         />
@@ -71,7 +56,7 @@ const Clip = ({ clip }) => {
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
       >
-        <Box sx={style} style={{ backgroundColor: "transparent" }}>
+        <Box className="modal-style">
           <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
             Trailer
           </Typography>

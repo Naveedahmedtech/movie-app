@@ -7,7 +7,7 @@ import ResponsiveCarousel from "../../../components/responsiveCarousel/Responsiv
 import HomeCardItems from "../../../components/homeCardItems/HomeCardItems";
 const TrendingCarousel = () => {
   const { url } = useSelector(movieState);
-  const { data, loading } = useFetch("/trending/all/week");
+  const { data } = useFetch("/trending/all/week");
   return (
     <>
       <Typography variant="h4" sx={{ color: "white", margin: "20px" }}>

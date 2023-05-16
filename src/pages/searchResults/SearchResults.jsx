@@ -62,14 +62,7 @@ const SearchResults = () => {
           </Typography>
         )}
         {loading && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
+          <Box className="loading-box">
             <CircularProgress size={50} />
           </Box>
         )}
