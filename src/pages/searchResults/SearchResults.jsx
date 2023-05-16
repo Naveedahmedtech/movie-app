@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieData } from "../../utils/api";
 import InfiniteScroll from "react-infinite-scroll-component";
-import SearchResultItems from "./SearchResultItems";
 import { Grid, Typography, Box } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import CarouselContainer from "../../components/carouselContainer/CarouselContainer";
+import CardGridItems from "../../components/cardGridItems/CardGridItems";
 const SearchResults = () => {
   const [data, setData] = useState(null);
   const [pages, setPages] = useState(1);
@@ -42,8 +42,6 @@ const SearchResults = () => {
     fetchInitialSearchData();
   }, [query]);
 
-
-
   return (
     <>
       <CarouselContainer>
@@ -69,10 +67,10 @@ const SearchResults = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: '100%'
+              height: "100%",
             }}
           >
-            <CircularProgress size={150} />
+            <CircularProgress size={50} />
           </Box>
         )}
         <InfiniteScroll
@@ -86,10 +84,9 @@ const SearchResults = () => {
             {data?.results?.length > 0 &&
               data?.results?.map((items, index) => {
                 {
-                  /* if (items?.media_type === "person") return; */
                 }
                 return (
-                  <SearchResultItems
+                  <CardGridItems
                     key={index}
                     items={items}
                     fromSearch={true}

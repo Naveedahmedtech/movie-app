@@ -9,20 +9,27 @@ import {
 } from "@mui/material";
 import { movieState } from "../../features/movieSlice";
 import { useSelector } from "react-redux";
-import bg from '../../assets/images/bg.jpg'
+import bg from "../../assets/images/bg.jpg";
 import { useNavigate } from "react-router-dom";
-const SearchResultItems = ({ items, fromSearch }) => {
+const CardGridItems = ({ items, fromSearch }) => {
   const navigate = useNavigate();
   const { url } = useSelector(movieState);
   const isPostImage = url?.poster + items?.poster_path || bg;
 
-      const handleClick = () => {
-        navigate(`/details/${items?.id}`);
-      };
+  const handleClick = () => {
+    navigate(`/details/${items?.id}`);
+  };
   return (
     <>
-      <Grid item xs={12} md={6} lg={3} sx={{cursor: 'pointer'}} onClick={handleClick}>
-        <Card className="card-color" >
+      <Grid
+        item
+        xs={12}
+        md={6}
+        lg={3}
+        sx={{ cursor: "pointer" }}
+        onClick={handleClick}
+      >
+        <Card className="card-color">
           <CardMedia
             sx={{ height: "300px" }}
             image={isPostImage}
@@ -49,4 +56,4 @@ const SearchResultItems = ({ items, fromSearch }) => {
   );
 };
 
-export default SearchResultItems;
+export default CardGridItems;

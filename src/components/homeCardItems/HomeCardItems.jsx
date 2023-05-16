@@ -1,13 +1,14 @@
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
-import Progress from "../../../components/progress/Progress";
+import Progress from "../progress/Progress";
 import { useNavigate } from "react-router-dom";
-const TrendingItems = ({ items, url }) => {
+const HomeCardItems = ({ items, url, isTrue }) => {
   const navigate = useNavigate();
   const rating = items?.vote_average.toFixed(1);
   const scaleMin = 0;
   const scaleMax = 100;
   const ratingMin = 0;
   const ratingMax = 10;
+  isTrue = true;
 
   const scaledRating =
     ((rating - ratingMin) / (ratingMax - ratingMin)) * (scaleMax - scaleMin) +
@@ -43,8 +44,8 @@ const TrendingItems = ({ items, url }) => {
             <Typography
               gutterBottom
               variant="h5"
-              className="text-white"
               component="h2"
+              className="text-white"
             >
               {items.original_title}
             </Typography>
@@ -52,13 +53,16 @@ const TrendingItems = ({ items, url }) => {
               {items.overview.substring(0, 30)} ....
             </Typography>
           </CardContent>
+          {
+            isTrue &&
           <CardContent>
             <Progress value={scaledRating} color={progressColor} />
           </CardContent>
+          }
         </Box>
       </Card>
     </>
   );
 };
 
-export default TrendingItems;
+export default HomeCardItems;

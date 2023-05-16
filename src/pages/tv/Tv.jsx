@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { fetchMovieData } from "../../utils/api";
 import InfiniteScroll from "react-infinite-scroll-component";
-import TvItems from "./TvItems";
 import { Grid, Typography, Box } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import CarouselContainer from "../../components/carouselContainer/CarouselContainer";
+import CardGridItems from "../../components/cardGridItems/CardGridItems";
 const Tv = () => {
   const [data, setData] = useState(null);
   const [pages, setPages] = useState(1);
@@ -77,7 +77,7 @@ const Tv = () => {
                   /* if (items?.media_type === "person") return; */
                 }
                 return (
-                  <TvItems
+                  <CardGridItems
                     key={index}
                     items={items}
                     fromSearch={true}

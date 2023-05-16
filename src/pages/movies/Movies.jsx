@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchMovieData } from "../../utils/api";
 import InfiniteScroll from "react-infinite-scroll-component";
-import MovieItems from "./MovieItems";
 import {
   Grid,
   Typography,
@@ -17,6 +16,7 @@ import {
 import CircularProgress from "@mui/material/CircularProgress";
 import CarouselContainer from "../../components/carouselContainer/CarouselContainer";
 import useFetch from "../../hooks/useFetch";
+import CardGridItems from "../../components/cardGridItems/CardGridItems";
 
 const Movies = () => {
   const [data, setData] = useState(null);
@@ -26,20 +26,7 @@ const Movies = () => {
 
   const { data: genres } = useFetch("/genre/movie/list");
 
-  const fetchInitialSearchData = () => {
-    setLoading(true);
-    const genreQuery =
-      selectedGenres.length > 0
-        ? `&with_genres=${selectedGenres.join(",")}`
-        : "";
-    fetchMovieData(`/discover/movie?page=1${genreQuery}`).then((res) => {
-      setData(res);
-      setPages((pre) => pre + 1);
-      setLoading(false);
-    });
-  };
-
-  const fetchNextSearchData = () => {
+  const fetchData = () => {
     setLoading(true);
     const genreQuery =
       selectedGenres.length > 0
@@ -68,7 +55,7 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    fetchNextSearchData();
+    fetchData();
   }, [selectedGenres]);
 
   return (
@@ -126,18 +113,15 @@ const Movies = () => {
         <InfiniteScroll
           className="content"
           dataLength={data?.results?.length || []}
-          next={fetchNextSearchData}
+          next={fetchData}
           hasMore={pages <= data?.total_pages}
           loader={"loading"}
         >
           <Grid container spacing={2}>
             {data?.results?.length > 0 &&
               data?.results?.map((items, index) => {
-                {
-                  /* if (items?.media_type === "person") return; */
-                }
                 return (
-                  <MovieItems
+                  <CardGridItems
                     key={index}
                     items={items}
                     fromSearch={true}
