@@ -209,6 +209,9 @@ html {
     padding: 4px;
 }
 
+.hero-header {
+    font-weight: bold;
+}
 
 @media screen and (min-width: 1200px) {}
 
@@ -220,6 +223,7 @@ html {
 
     .hero-header {
         font-size: 2.5rem !important;
+        font-weight: bold !important;
     }
 
     .hero-search-field {
@@ -279,21 +283,6 @@ html {
     .hero-container {
         height: 40vh;
         margin-top: 60px;
-    }
-
-    .hero-header {
-        font-size: 2rem !important;
-    }
-
-    .hero-search-field {
-        font-size: 10px;
-        padding: 5px 10px;
-    }
-
-    .hero-search-icon {
-        top: 3px;
-        right: 10px;
-        font-size: 23px !important;
     }
 
     .banner-res {
