@@ -24,7 +24,7 @@ const TrendingItems = ({ items, url }) => {
   else progressColor.color = "red";
 
   const handleClick = () => {
-    navigate(`details/${items?.id}`);
+    navigate(`/details/${items?.id}`);
   };
   return (
     <>

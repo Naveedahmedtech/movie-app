@@ -25,7 +25,7 @@ const TopRatedItems = ({ items, url }) => {
 
 
   const handleClick = () => {
-    navigate(`details/${items?.id}`)
+    navigate(`/details/${items?.id}`)
   }
   return (
     <>

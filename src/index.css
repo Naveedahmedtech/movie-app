@@ -151,6 +151,10 @@ html {
     color: white;
 }
 
+.avatar-m:first-child{
+    margin: 20px;
+    margin-left: 0;
+}
 
 @media screen and (min-width: 1200px) {
 
@@ -240,4 +244,8 @@ html {
         right: 10px;
         font-size: 23px !important;
     }
+    .banner-res{
+        width: 100% !important;
+    }
 }
+

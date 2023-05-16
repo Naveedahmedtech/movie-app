@@ -42,6 +42,8 @@ const SearchResults = () => {
     fetchInitialSearchData();
   }, [query]);
 
+
+
   return (
     <>
       <CarouselContainer>
@@ -58,7 +60,7 @@ const SearchResults = () => {
             className="text-white"
             sx={{ textAlign: "center", color: "red" }}
           >
-            Opps! we didn't found the search results
+            Opps! No Match Results
           </Typography>
         )}
         {loading && (

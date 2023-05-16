@@ -8,7 +8,7 @@ const SearchHero = () => {
   const navigate = useNavigate();
   const handleQuery = (e) => {
     if (e.key === "Enter" && query.length > 0) {
-      navigate(`search/${query}`)
+      navigate(`/search/${query}`)
     }
   }
 
