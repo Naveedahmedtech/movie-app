@@ -31,11 +31,13 @@ const TopRatedCarousel = ({ deviceType }) => {
   return (
     <>
       <Typography variant="h4" sx={{ color: "white", margin: "20px" }}>
-        Top Rated
+        Top Rated Movies
       </Typography>
       <Carousel responsive={responsive}>
         {data?.results?.length > 0 &&
-          data?.results?.map((items) => <TopRatedItems key={items.id} items={items} url={url.poster} />)}
+          data?.results?.map((items) => (
+            <TopRatedItems key={items.id} items={items} url={url.poster} />
+          ))}
       </Carousel>
     </>
   );

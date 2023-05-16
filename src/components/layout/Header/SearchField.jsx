@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
 import SearchIcon from "@mui/icons-material/Search";
-import SigninOut from './SigninOut';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -26,7 +25,6 @@ const SearchField = () => {
         />
         <SearchIcon className="search-icon" />
       </Box>
-       <SigninOut />
     </>
   );
 };

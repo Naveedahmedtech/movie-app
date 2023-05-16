@@ -37,7 +37,7 @@ const Hero = () => {
               height: "100%",
             }}
           >
-            <CircularProgress size={150} />
+            <CircularProgress size={50} />
           </Box>
         )}
         <CardMedia

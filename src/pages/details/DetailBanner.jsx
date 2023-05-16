@@ -109,18 +109,16 @@ const DetailBanner = ({ data, loading, url, video }) => {
                 </Typography>
               </CardContent>
 
-              <CardContent>
+              <CardContent sx={{display: 'flex', flexWrap: 'wrap'}}>
                 {data?.genres.map((gen) => (
                   <Typography
-                    className="text-white"
-                    sx={{ padding: "10px", backgroundColor: "red" }}
-                    component="span"
+                    className="text-white gener-m"
                   >
                     {gen.name}
                   </Typography>
                 ))}
               </CardContent>
-              {/* play button */}
+
               <CardContent>
                 <Progress
                   value={scaledRating}
@@ -136,6 +134,9 @@ const DetailBanner = ({ data, loading, url, video }) => {
                   }}
                   onClick={handleOpen}
                 />
+                <Typography className="text-white" >
+                  Watch Trailer 
+                </Typography>
               </CardContent>
 
               <CardContent>

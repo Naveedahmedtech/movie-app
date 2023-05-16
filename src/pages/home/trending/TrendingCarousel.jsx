@@ -31,7 +31,7 @@ const TrendingCarousel = ({ deviceType }) => {
   return (
     <>
       <Typography variant="h4" sx={{ color: "white", margin: "20px" }}>
-        Trending
+        Trending Movies
       </Typography>
       <Carousel responsive={responsive}>
         {data?.results.length > 0 && data?.results?.map((items) => (

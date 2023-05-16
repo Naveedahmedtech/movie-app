@@ -33,7 +33,6 @@ const OfficialClips = ({ video }) => {
         {clips?.length > 0 &&
           clips?.slice(0, 6).map((clip) => <Clip key={clip?.id} clip={clip} />)}
       </Box>
-      <Link className="text-white">See All</Link>
     </main>
   );
 };

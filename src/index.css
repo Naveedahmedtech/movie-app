@@ -151,9 +151,21 @@ html {
     color: white;
 }
 
+.avatar-m{
+    margin: 20px;
+}
 .avatar-m:first-child{
     margin: 20px;
     margin-left: 0;
+}
+.gener-m{
+    margin: 10px 20px !important;
+    background-color: red;
+    padding: 5px;
+    flex: 1 1 auto;
+}
+.gener-m:first-child{
+    margin-left: 0 !important;
 }
 
 @media screen and (min-width: 1200px) {
@@ -247,5 +259,8 @@ html {
     .banner-res{
         width: 100% !important;
     }
+        .gener-m {
+            margin-left: 0 !important;
+        }
 }
 

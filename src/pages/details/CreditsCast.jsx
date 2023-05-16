@@ -24,7 +24,6 @@ const CreditsCast = ({ credits, creditsLoading, url }) => {
               </Box>
             ))}
         </Box>
-        <Link className="text-white">See All</Link>
       </main>
     </>
   );

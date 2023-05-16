@@ -31,7 +31,7 @@ const PopularCarousel = ({ deviceType }) => {
   return (
     <>
       <Typography variant="h4" sx={{ color: "white", margin: "20px" }}>
-        Popular
+        Popular Movies
       </Typography>
       <Carousel responsive={responsive}>
         {data?.results.length > 0 &&
