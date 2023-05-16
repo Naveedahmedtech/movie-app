@@ -34,7 +34,7 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Header />}>
+      <Route path="/" element={<Header />} errorElement={<h1 className="color-danger center">Sorry! something went wrong</h1>}>
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="movies" element={<Movies />} />

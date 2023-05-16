@@ -6,8 +6,8 @@ import { movieState } from "../../features/movieSlice";
 import useFetch from "../../hooks/useFetch";
 import { useSelector } from "react-redux";
 import HomeCardItems from "../../components/homeCardItems/HomeCardItems";
-import { Typography } from "@mui/material";
-import ResponsiveCarousel from '../../components/responsiveCarousel/ResponsiveCarousel'
+import { Typography, Box, CircularProgress } from "@mui/material";
+import ResponsiveCarousel from "../../components/responsiveCarousel/ResponsiveCarousel";
 
 const Details = () => {
   const { url } = useSelector(movieState);
@@ -25,42 +25,59 @@ const Details = () => {
     `/movie/${id}/recommendations`
   );
 
-
   return (
     <>
-      <DetailBanner data={data} loading={loading} url={url} video={video} />
-      <CreditsCast
-        credits={credits}
-        creditsLoading={creditsLoading}
-        url={url}
-      />
-      <OfficialClips video={video} url={url} />
-      <Typography
-        className="text-white"
-        sx={{ margin: "50px 0 20px 20px" }}
-        variant="h5"
-      >
-        Most Similar
-      </Typography>
-      <ResponsiveCarousel>
-        {similar?.results?.length > 0 &&
-          similar?.results?.map((items) => (
-            <HomeCardItems items={items} url={url.poster} />
-          ))}
-      </ResponsiveCarousel>
-      <Typography
-        className="text-white"
-        sx={{ margin: "50px 0 20px 20px" }}
-        variant="h5"
-      >
-        Top Recommendations
-      </Typography>
-      <ResponsiveCarousel>
-        {recommendation?.results?.length > 0 &&
-          recommendation?.results?.map((items) => (
-            <HomeCardItems items={items} url={url.poster} />
-          ))}
-      </ResponsiveCarousel>
+      {loading ? (
+        <Box className="loading-box">
+          <CircularProgress size={50} />
+        </Box>
+      ) : (
+        <>
+          <DetailBanner data={data} loading={loading} url={url} video={video} />
+          <CreditsCast
+            credits={credits}
+            creditsLoading={creditsLoading}
+            url={url}
+          />
+          <OfficialClips video={video} url={url} />
+          <Typography
+            className="text-white"
+            sx={{ margin: "50px 0 20px 20px" }}
+            variant="h5"
+          >
+            Most Similar
+          </Typography>
+          {similar?.results?.length < 1 && (
+            <Typography className="center color-danger">
+              No Data Found
+            </Typography>
+          )}
+          <ResponsiveCarousel>
+            {similar?.results?.length > 0 &&
+              similar?.results?.map((items) => (
+                <HomeCardItems items={items} url={url.poster} />
+              ))}
+          </ResponsiveCarousel>
+          <Typography
+            className="text-white"
+            sx={{ margin: "50px 0 20px 20px" }}
+            variant="h5"
+          >
+            Top Recommendations
+          </Typography>
+          {recommendation?.results?.length < 1 && (
+            <Typography className="center color-danger">
+              No Data Found
+            </Typography>
+          )}
+          <ResponsiveCarousel>
+            {recommendation?.results?.length > 0 &&
+              recommendation?.results?.map((items) => (
+                <HomeCardItems items={items} url={url.poster} />
+              ))}
+          </ResponsiveCarousel>
+        </>
+      )}
     </>
   );
 };

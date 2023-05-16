@@ -65,30 +65,34 @@ const Movies = () => {
             <CircularProgress size={50} />
           </Box>
         )}
-        <GenreFilter
-          genres={genres?.genres}
-          selectedGenres={selectedGenres}
-          handleGenreChange={handleGenreChange}
-        />
-        <InfiniteScroll
-          className="content"
-          dataLength={data?.results?.length || 0}
-          next={fetchData}
-          hasMore={pages <= data?.total_pages}
-          loader={<div>Loading...</div>}
-        >
-          <Grid container spacing={2}>
-            {data?.results?.length > 0 &&
-              data?.results?.map((items, index) => (
-                <CardGridItems
-                  key={index}
-                  items={items}
-                  fromSearch={true}
-                  media_type={items.media_type}
-                />
-              ))}
-          </Grid>
-        </InfiniteScroll>
+        {!loading && (
+          <>
+            <GenreFilter
+              genres={genres?.genres}
+              selectedGenres={selectedGenres}
+              handleGenreChange={handleGenreChange}
+            />
+            <InfiniteScroll
+              className="content"
+              dataLength={data?.results?.length || 0}
+              next={fetchData}
+              hasMore={pages <= data?.total_pages}
+              loader={<div>Loading...</div>}
+            >
+              <Grid container spacing={2}>
+                {data?.results?.length > 0 &&
+                  data?.results?.map((items, index) => (
+                    <CardGridItems
+                      key={index}
+                      items={items}
+                      fromSearch={true}
+                      media_type={items.media_type}
+                    />
+                  ))}
+              </Grid>
+            </InfiniteScroll>
+          </>
+        )}
       </CarouselContainer>
     </>
   );

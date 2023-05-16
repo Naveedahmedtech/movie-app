@@ -171,12 +171,24 @@ html {
     margin-left: 0 !important;
 }
 
+/* hero box */
+.hero-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+
 /* loading box style */
 .loading-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 50vh;
 }
 
 .res-box {
@@ -207,10 +219,21 @@ html {
     border: none;
     outline: none;
     padding: 4px;
+    width: 80%;
 }
 
 .hero-header {
     font-weight: bold;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.color-danger {
+    color: red;
 }
 
 @media screen and (min-width: 1200px) {}
