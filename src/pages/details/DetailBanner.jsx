@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReactPlayer from "react-player";
 import {
   Card,
   Box,
@@ -14,6 +15,8 @@ import Progress from "../../components/progress/Progress";
 const DetailBanner = ({ data, url, video }) => {
   const [open, setOpen] = useState(false);
   const trailer = video?.results?.find((vid) => vid.type === "Trailer");
+  if (!trailer.key) return;
+  console.log(trailer.key)
 
   const handleOpen = () => {
     setOpen(true);
@@ -146,12 +149,12 @@ const DetailBanner = ({ data, url, video }) => {
         aria-describedby="keep-mounted-modal-description"
       >
         <Box className="modal-style">
-          <video
-            src={`https://youtube.com/watch?v=${trailer?.key}`}
+          <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${trailer?.key}`}
             width="100%"
             height="100%"
             controls
-          ></video>
+          />
         </Box>
       </Modal>
     </>

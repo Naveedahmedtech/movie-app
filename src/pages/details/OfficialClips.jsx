@@ -1,6 +1,6 @@
 import { Avatar, Box, Typography, Modal } from "@mui/material";
 import { useState } from "react";
-
+import ReactPlayer from "react-player";
 const OfficialClips = ({ video }) => {
   const clips = video?.results?.filter((vid) => vid.type !== "Trailer");
 
@@ -26,6 +26,10 @@ export default OfficialClips;
 
 const Clip = ({ clip }) => {
   const [open, setOpen] = useState(false);
+
+
+  console.log(clip?.key)
+
 
   const handleOpen = () => {
     setOpen(true);
@@ -55,15 +59,12 @@ const Clip = ({ clip }) => {
         aria-describedby="keep-mounted-modal-description"
       >
         <Box className="modal-style">
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            Trailer
-          </Typography>
-          <video
-            src={`https://youtube.com/watch?v=${clip?.key}`}
+          <ReactPlayer
+            url={`https://youtube.com/watch?v=${clip?.key}`}
             width="100%"
-            height="auto"
+            height="100%"
             controls
-          ></video>
+          />
         </Box>
       </Modal>
     </>
