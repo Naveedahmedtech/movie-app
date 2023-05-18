@@ -1,5 +1,5 @@
 import { Avatar, Box, Typography, Modal } from "@mui/material";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ReactPlayer from "react-player";
 const OfficialClips = ({ video }) => {
   const clips = video?.results?.filter((vid) => vid.type !== "Trailer");
@@ -26,25 +26,26 @@ export default OfficialClips;
 
 const Clip = ({ clip }) => {
   const [open, setOpen] = useState(false);
-
-
-  console.log(clip?.key)
-
+  const playerRef = useRef(null);
 
   const handleOpen = () => {
     setOpen(true);
-    console.log(clip?.key);
   };
 
   const handleClose = () => {
     setOpen(false);
+    // stop the video after closing the modal
+    if (playerRef.current) {
+      playerRef.current.seekTo(0);
+      playerRef.current.pause();
+    }
   };
 
   return (
     <>
       <Box onClick={handleOpen} sx={{ marginBottom: "10px" }}>
         <Avatar
-          sx={{ width: "150px", height: "150px" }}
+          sx={{ width: "150px", height: "150px", cursor: "pointer" }}
           className="avatar-m"
           alt="C"
           src={`https://img.youtube.com/vi/${clip?.key}/mqdefault.jpg`}
@@ -64,6 +65,7 @@ const Clip = ({ clip }) => {
             width="100%"
             height="100%"
             controls
+            ref={playerRef}
           />
         </Box>
       </Modal>

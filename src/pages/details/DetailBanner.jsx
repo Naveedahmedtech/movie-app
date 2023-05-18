@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import {
   Card,
@@ -14,15 +14,20 @@ import Progress from "../../components/progress/Progress";
 
 const DetailBanner = ({ data, url, video }) => {
   const [open, setOpen] = useState(false);
+  const playerRef = useRef();
   const trailer = video?.results?.find((vid) => vid.type === "Trailer");
-  if (!trailer.key) return;
-  console.log(trailer.key)
 
   const handleOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
+    // stop the video after closing the modal
+    if (playerRef.current) {
+      playerRef.current.seekTo(0);
+      playerRef.current.pause();
+    }
   };
 
   const rating = data?.vote_average?.toFixed(1);
@@ -154,6 +159,7 @@ const DetailBanner = ({ data, url, video }) => {
             width="100%"
             height="100%"
             controls
+            ref={playerRef}
           />
         </Box>
       </Modal>

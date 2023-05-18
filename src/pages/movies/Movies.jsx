@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Grid, Typography, Box, CircularProgress } from "@mui/material";
 import CarouselContainer from "../../components/carouselContainer/CarouselContainer";
@@ -14,8 +14,10 @@ const Movies = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);
 
   const { data: genres } = useFetch("/genre/movie/list");
+  const scrollRef = useRef(null);
+  const prevScrollPosition = useRef(0);
 
-  const fetchData = () => {
+  const fetchNextPageData = () => {
     setLoading(true);
     const genreQuery =
       selectedGenres.length > 0
@@ -23,14 +25,10 @@ const Movies = () => {
         : "";
     fetchMovieData(`/discover/movie?page=${pages + 1}${genreQuery}`).then(
       (res) => {
-        if (data?.results) {
-          setData({
-            ...data,
-            results: [...data.results, ...res.results],
-          });
-        } else {
-          setData(res);
-        }
+        setData((prevData) => ({
+          ...prevData,
+          results: [...prevData.results, ...res.results],
+        }));
         setPages((prevPages) => prevPages + 1);
         setLoading(false);
       }
@@ -43,9 +41,32 @@ const Movies = () => {
     setData(null);
   };
 
+  const fetchInitialData = () => {
+    setLoading(true);
+    const genreQuery =
+      selectedGenres.length > 0
+        ? `&with_genres=${selectedGenres.join(",")}`
+        : "";
+    fetchMovieData(`/discover/movie?page=1${genreQuery}`).then((res) => {
+      setData(res);
+      setPages(1);
+      setLoading(false);
+    });
+  };
+
   useEffect(() => {
-    fetchData();
+    fetchInitialData();
   }, [selectedGenres]);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo(0, prevScrollPosition.current);
+    }
+  }, [data]);
+
+  const handleScroll = () => {
+    prevScrollPosition.current = scrollRef.current.scrollTop;
+  };
 
   return (
     <>
@@ -60,39 +81,31 @@ const Movies = () => {
             Oops! No Match Results
           </Typography>
         )}
-        {loading && (
-          <Box className="loading-box">
-            <CircularProgress size={50} />
-          </Box>
-        )}
-        {!loading && (
-          <>
-            <GenreFilter
-              genres={genres?.genres}
-              selectedGenres={selectedGenres}
-              handleGenreChange={handleGenreChange}
-            />
-            <InfiniteScroll
-              className="content"
-              dataLength={data?.results?.length || 0}
-              next={fetchData}
-              hasMore={pages <= data?.total_pages}
-              loader={<div>Loading...</div>}
-            >
-              <Grid container spacing={2}>
-                {data?.results?.length > 0 &&
-                  data?.results?.map((items, index) => (
-                    <CardGridItems
-                      key={index}
-                      items={items}
-                      fromSearch={true}
-                      media_type={items.media_type}
-                    />
-                  ))}
-              </Grid>
-            </InfiniteScroll>
-          </>
-        )}
+        <GenreFilter
+          genres={genres?.genres}
+          selectedGenres={selectedGenres}
+          handleGenreChange={handleGenreChange}
+        />
+        <InfiniteScroll
+          className="content"
+          dataLength={data?.results?.length || 0}
+          next={fetchNextPageData}
+          hasMore={pages < data?.total_pages}
+          loader={<div>Loading...</div>}
+          scrollableTarget="scrollable-element"
+        >
+          <Grid container spacing={2}>
+            {data?.results?.length > 0 &&
+              data?.results?.map((items, index) => (
+                <CardGridItems
+                  key={index}
+                  items={items}
+                  fromSearch={true}
+                  media_type={items.media_type}
+                />
+              ))}
+          </Grid>
+        </InfiniteScroll>
       </CarouselContainer>
     </>
   );
